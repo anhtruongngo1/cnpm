@@ -1,4 +1,103 @@
-.wrapper{
-    height: 300px;
-    background-color: antiquewhite;
+.wrapper {
+    height: 130px;
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 30px;
+        background-color: #efefef;
+        padding: 0 40px;
+        font-size: 1.3rem;
+    }
+    .inner {
+        height: 100px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #fff;
+        padding: 0 40px;
+        box-shadow: 0 4px 2px -2px gray;
+
+        .inner-start {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            font-size: 1.8rem;
+            font-weight: 500;
+            .logo {
+                height: 100%;
+                img {
+                    height: 100%;
+                    padding-right: 54px;
+                }
+            }
+
+            a {
+                cursor: default;
+                margin-right: 54px;
+                border-bottom: 1px solid #333;
+                border-color: transparent;
+                &:hover {
+                    animation: border-b 0.8s ease-out forwards;
+                }
+            }
+        }
+
+        .inner-end {
+            .search {
+                position: relative;
+                display: flex;
+                align-items: center;
+                background-color: transparent;
+                font-size: 2.4rem;
+                border: 2px solid #333;
+                border-radius: 8rem;
+                input {
+                    background-color: transparent;
+                    padding: 16px 26px;
+                    color: #333;
+                    padding-right: 70px;
+                    font-size: 2.4rem;
+                }
+                svg {
+                    position: absolute;
+                    right: 20px;
+                    cursor: pointer;
+                    padding: 10px 0px;
+                    padding-left: 20px;
+                    border-left: 1px solid #333;
+                }
+            }
+
+            a {
+                font-size: 1.8rem;
+                font-weight: 500;
+                cursor: pointer;
+                margin-left: 54px;
+            }
+
+            .cart {
+                position: relative;
+                span {
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    font-size: 1.6rem;
+                    line-height: 20px;
+                    border-radius: 100%;
+                    top: -5px;
+                    right: -16px;
+                }
+            }
+        }
+    }
+}
+
+@keyframes border-b {
+    from {
+        border-color: transparent;
+    }
+    to {
+        border-color: #333;
+    }
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaUser, FaLock } from 'react-icons/fa';
 import { FiEye, FiEyeOff } from 'react-icons/fi';
-
+import { useNavigate } from 'react-router-dom';
 import '../auth/Login.scss';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -10,6 +10,7 @@ import { IconFace, IconGoogle, IconIns } from '../Icons/Icons';
 function Login() {
     const [notify, setnotify] = useState('');
     const [isShowPassword, setisShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -99,7 +100,9 @@ function Login() {
                             {notify && notify.length > 0 && <p>{notify}</p>}
 
                             <div className="login-forgot">
-                                <p className="login-signup">signup</p>
+                                <p onClick={() => navigate('/auth/register')} className="login-signup">
+                                    signup
+                                </p>
                             </div>
 
                             <div className="login-login-icon">
