@@ -6,9 +6,11 @@ const cx = classNames.bind(styles);
 function Modal({ children, onClose }) {
     return (
         <>
-            <div onClick={onClose} className={cx('wrapper')}>
+            <div className={cx('wrapper')}>
                 {children}
-                <span>X</span>
+                <span className={cx('close')} onClick={onClose}>
+                    X
+                </span>
             </div>
         </>
     );
