@@ -1,0 +1,97 @@
+.wrapper {
+}
+.image {
+    overflow: hidden;
+    margin-bottom: 100px;
+}
+.image-bg {
+    max-height: 700px;
+    width: 100%;
+    object-fit: cover;
+}
+.image-bg1 {
+    position: absolute;
+    left: 20px;
+    top: -70px;
+    max-height: 700px;
+    width: 95%;
+    object-fit: cover;
+}
+.image-box {
+    display: flex;
+    padding: 0 7%;
+}
+.image-col-image {
+    width: 50%;
+    overflow: hidden;
+    padding: 0 20px;
+}
+.image-col-image1 {
+    width: 50%;
+    padding: 0 20px;
+    position: relative;
+}
+.image-col-title {
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    display: flex;
+    flex: 1;
+    margin: 10% 0;
+    width: 326px;
+    max-width: 326px;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: -webkit-left;
+    h6 {
+        font-family: Roboto, sans-serif;
+        color: #464646;
+        font-size: 13px;
+        font-weight: 400;
+        letter-spacing: 0.05em;
+        line-height: 2.15em;
+        text-transform: uppercase;
+        word-wrap: break-word;
+        display: inline-block;
+    }
+    h2 {
+        font-family: Roboto, sans-serif;
+        font-weight: 600;
+        color: #000001;
+        font-size: 35px;
+        line-height: 1.14em;
+        text-transform: initial;
+        word-wrap: break-word;
+        margin: 10px 0 20px;
+    }
+    p {
+        font-weight: 200;
+        margin-bottom: 20px;
+    }
+}
+.image-col-icon-box{
+    position: relative ;
+    top: 0;
+    left: 0;
+}
+.image-col-icon {
+    font-size: 30px;
+    fill: none;
+    stroke: currentColor;
+    stroke-dasharray: 251;
+    transform: rotate(90deg);
+    transform-origin: center;
+    width: 40px;
+    height: 40px;
+    color: #BCBCBC;
+    cursor: pointer;
+}
+.image-col-icon-btn{
+    position: absolute;
+    color: black;
+    bottom: 5px;
+    left: 20px;
+    background-color: white;
+    cursor: pointer;
+
+}
