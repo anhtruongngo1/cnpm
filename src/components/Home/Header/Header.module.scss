@@ -40,10 +40,14 @@
             a {
                 cursor: default;
                 margin-right: 54px;
-                border-bottom: 1px solid #333;
-                border-color: transparent;
-                &:hover {
-                    animation: border-b 0.8s ease-out forwards;
+                &::after {
+                    content: '';
+                    display: block;
+                    width: 100%;
+                    height: 1px;
+                }
+                &:hover::after {
+                    animation: border-b 0.6s ease-out forwards;
                 }
             }
         }
@@ -194,10 +198,12 @@
 
 @keyframes border-b {
     from {
-        border-color: transparent;
+        width: 0;
+        background-color: transparent;
     }
     to {
-        border-color: #333;
+        width: 100%;
+        background-color: #333;
     }
 }
 
