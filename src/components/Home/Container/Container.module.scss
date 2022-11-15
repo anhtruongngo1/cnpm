@@ -1,4 +1,5 @@
 .wrapper {
+    margin-top: 130px;
 }
 .image {
     overflow: hidden;
@@ -15,24 +16,22 @@
     top: -70px;
     max-height: 700px;
     object-fit: cover;
-   width: 0%;
+    width: 0%;
     min-height: 151px;
 }
-img[lazy-src]{
+img[lazy-src] {
     opacity: 1;
     animation: easeImg 0.9s ease-in;
     transition: all 0.9s;
-
 }
-@keyframes easeImg{
+@keyframes easeImg {
     from {
         width: 0;
     }
-    to{
+    to {
         width: 95%;
         opacity: 1;
     }
-
 }
 .image-box {
     display: flex;
@@ -86,8 +85,8 @@ img[lazy-src]{
         margin-bottom: 20px;
     }
 }
-.image-col-icon-box{
-    position: relative ;
+.image-col-icon-box {
+    position: relative;
     top: 0;
     left: 0;
 }
@@ -100,15 +99,14 @@ img[lazy-src]{
     transform-origin: center;
     width: 40px;
     height: 40px;
-    color: #BCBCBC;
+    color: #bcbcbc;
     cursor: pointer;
 }
-.image-col-icon-btn{
+.image-col-icon-btn {
     position: absolute;
     color: black;
     bottom: 5px;
     left: 20px;
     background-color: white;
     cursor: pointer;
-
 }
