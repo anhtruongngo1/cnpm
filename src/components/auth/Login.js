@@ -6,6 +6,7 @@ import '../auth/Login.scss';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { IconFace, IconGoogle, IconIns } from '../Icons/Icons';
+import Header from '../Home/Header/Header';
 
 function Login() {
     const [notify, setnotify] = useState('');
@@ -81,7 +82,7 @@ function Login() {
                                 <div className="login-input-icon">
                                     <FaUser />
                                 </div>
-                                <input type="text" placeholder="Capcha" />
+                                <input value="" type="text" placeholder="Capcha" />
                             </div>
                             <div className="login-forgot">
                                 <p onClick={() => handleModalForgot()} className="login-forgot-link">
