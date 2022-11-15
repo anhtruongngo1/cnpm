@@ -9,10 +9,47 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { IconCircle } from '~/components/Icons/Icons';
 import Image from '../Image';
+import { lazy, useEffect } from 'react';
 
 const cx = classNames.bind(styles);
 
 function Container() {
+    useEffect(()=>{
+       ready()
+
+    },[])
+
+    const ready = () =>{
+        if('IntersectionObserver' in  window){
+            var lazyImg = document.querySelectorAll('img[lazy-src]')
+            
+            let observer = new IntersectionObserver((entries)=>{
+                entries.forEach(entry =>{
+                    console.log(('checkkk' , entry.isIntersecting));
+                    if(entry.isIntersecting){
+                        load(entry.target)
+                        observer.unobserver()
+                    }
+
+                })
+            },{
+                rootMargin : "-100px"  
+            });
+            lazyImg.forEach(img =>{
+                observer.observe(img)
+            })
+    
+        }
+    }
+    const load = (img) => {
+        const url = img.getAttribute('lazy-src')
+            img.setAttribute('src' , url);
+            img.style.width = "95%";
+          
+    }
+    
+  
+    
     return (
         <div className={cx('wrapper')}>
             <div className={cx('image')}>
@@ -21,7 +58,7 @@ function Container() {
             <div className={cx('image')}>
                 <div className={cx('image-box')}>
                     <div className={cx('image-col-image')}>
-                        <Image src={bg2} className={cx('image-bg')} />
+                        <img lazy-src={bg2} className={cx('image-bg')} />
                     </div>
                     <div className={cx('image-col-title')}>
                         <h6>ABOUT OUR COLLECTIONS</h6>
@@ -47,12 +84,12 @@ function Container() {
                         </p>
                     </div>
                     <div className={cx('image-col-image1')}>
-                        <Image src={bg3} className={cx('image-bg1')} />
+                        <img lazy-src={bg3} className={cx('image-bg1')} />
                     </div>
                 </div>
                 <div className={cx('image-box')}>
                     <div className={cx('image-col-image1')}>
-                        <Image src={bg4} className={cx('image-bg1')} />
+                        <img lazy-src={bg4} className={cx('image-bg1')} />
                     </div>
                     <div className={cx('image-col-title')}>
                         <h6>ABOUT USED MATERIALS</h6>

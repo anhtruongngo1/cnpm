@@ -416,10 +416,10 @@ export const IconCircle = ({ width = '1em', height = '1em', className }) => (
         width={width}
         height={height}
         viewBox="0 0 40 40"
-        enable-background="new 0 0 40 40"
+        enableBackground="new 0 0 40 40"
        // xml:space="preserve"
     >
-        <circle class="qodef-arc-1" cx="20" cy="20" r="19"></circle>
-        <circle class="qodef-arc-2" cx="20" cy="20" r="19"></circle>
+        <circle className="qodef-arc-1" cx="20" cy="20" r="19"></circle>
+        <circle className="qodef-arc-2" cx="20" cy="20" r="19"></circle>
     </svg>
 );

@@ -101,7 +101,7 @@ function Login() {
 
                             <div className="login-forgot">
                                 <p onClick={() => navigate('/auth/register')} className="login-signup">
-                                    signup
+                                    SIGNUP
                                 </p>
                             </div>
 

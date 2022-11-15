@@ -18,11 +18,12 @@
                 margin: auto;
                 .login-content {
                     width: 70%;
-                    height: 555px;
+                   // height: 555px;
                     background-image: url('../../assets/background/content.jpg');
                     background-repeat: no-repeat;
                     background-position: center;
                     background-size: cover;
+                  
                 }
                 .login-container {
                     background: #000232;
@@ -30,7 +31,7 @@
                     padding: 10px 30px 8px;
                     margin: auto;
                     border-radius: 5px;
-
+                    //max-height: 555px;
                     .login-img {
                         width: 100px;
                         height: 100px;

@@ -17,8 +17,11 @@
                 margin: auto;
                 .register-content {
                     width: 70%;
-                    height: 555px;
+                    // height: 555px;
                     background-image: url('../../assets/background/content.jpg');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
                 }
                 .register-container {
                     background: #000232;
@@ -99,6 +102,7 @@
             text-align: center;
             background-attachment: fixed;
             background-position: center;
+            background-size: cover;
             height: 100%;
             overflow: hidden;
             .register-block {
@@ -106,14 +110,17 @@
                 display: flex;
                 margin: auto;
                 .register-content {
-                    width: 0%;
-                    height: 555px;
+                    width: 70%;
+                    // height: 555px;
                     background-image: url('../../assets/background/content.jpg');
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: cover;
                 }
                 .register-container {
                     background: #000232;
-                    width: 100%;
-                    padding: 15px 30px 15px;
+                    width: 30%;
+                    padding: 10px 30px 8px;
                     margin: auto;
                     border-radius: 5px;
                     .login-errmess {
@@ -154,7 +161,6 @@
                             background: transparent;
                             color: white;
                             font-size: 17px;
-                           
                         }
                     }
 
