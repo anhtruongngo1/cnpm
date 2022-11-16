@@ -6,7 +6,6 @@ import '../auth/Login.scss';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { IconFace, IconGoogle, IconIns } from '../Icons/Icons';
-import Header from '../Home/Header/Header';
 
 function Login() {
     const [notify, setnotify] = useState('');

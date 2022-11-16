@@ -156,30 +156,53 @@
         font-size: 1.6rem;
     }
     .cart-item {
+        position: relative;
         display: flex;
         align-items: center;
-        justify-content: space-around;
+        // justify-content: space-around;
+        margin-bottom: 16px;
         height: 60px;
         width: 500px;
         .cart-image {
             width: 50px;
             height: 80%;
             border-radius: 100%;
+            margin: 0 16px;
         }
-        .cart-name {
-            font-weight: 500;
-            font-size: 1.8rem;
-            overflow: hidden;
+        .cart-box {
+            display: block;
+            text-align: left;
+            max-width: 70%;
+            height: 100%;
+            .cart-name {
+                height: 50%;
+                font-weight: 500;
+                font-size: 1.8rem;
+                overflow: hidden;
+                // line-height: 60px;
+            }
+            .cart-price {
+                font-size: 2rem;
+                font-weight: 600;
+                font-style: italic;
+                color: skyblue;
+            }
         }
-        .cart-price {
-            font-weight: 600;
-            font-style: italic;
-            color: skyblue;
-            float: right;
-        }
+
         &:hover {
             cursor: pointer;
             background-color: rgb(236, 235, 235);
+        }
+        .cart-close {
+            position: absolute;
+            right: 30px;
+            top: 0;
+            padding: 5px 12px;
+            // height: 40px;
+            border-radius: 100%;
+            &:hover {
+                background-color: #ccc;
+            }
         }
     }
 }

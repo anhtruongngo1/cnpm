@@ -3,7 +3,14 @@ import styles from './Header.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faCartPlus, faSearch, faSpinner, faArrowUp } from '@fortawesome/free-solid-svg-icons';
+import {
+    faMagnifyingGlass,
+    faCartPlus,
+    faSearch,
+    faSpinner,
+    faArrowUp,
+    faClose,
+} from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import TippyHeadless from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
@@ -11,6 +18,7 @@ import 'tippy.js/dist/tippy.css';
 import logo from '../../../assets/logo/logo.jpg';
 import Modal from '~/Modal';
 import Popper from '~/components/GlobalStyles/Popper';
+import axios from 'axios';
 
 const cx = classNames.bind(styles);
 
@@ -18,9 +26,18 @@ function Header({ children }) {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showInput, setShowInput] = useState(false);
-    const [scrollY, setScrollY] = useState(window.scrollY);
+    const [cart, setCart] = useState([]);
 
     const ref_Header = useRef();
+
+    useEffect(() => {
+        const getCart = async () => {
+            const res = await axios.get('http://localhost:3000/cart');
+            console.log(res.data);
+            setCart(res.data);
+        };
+        getCart();
+    }, []);
 
     // useEffect(() => {
     //     window.onscroll = () => {
@@ -117,7 +134,7 @@ function Header({ children }) {
                         </Tippy>
 
                         <TippyHeadless
-                            // visible
+                            visible
                             placement="bottom"
                             interactive
                             offset={[0, 20]}
@@ -126,27 +143,31 @@ function Header({ children }) {
                                     <div className={cx('cart-list')} tabIndex="-1">
                                         <Popper>
                                             <h1 className={cx('cart-title')}>Sản phẩm đã thêm</h1>
-                                            <div className={cx('cart-item')}>
-                                                <img
-                                                    className={cx('cart-image')}
-                                                    src={
-                                                        'https://anphat.com.vn/media/product/33299_e_dra_transformer_black.jpg'
-                                                    }
-                                                ></img>
-                                                <span className={cx('cart-name')}>Bàn gaming E-Dra</span>
-                                                <span className={cx('cart-price')}>
-                                                    {new Intl.NumberFormat('vi-VN', {
-                                                        style: 'currency',
-                                                        currency: 'VND',
-                                                    }).format(3099000)}
-                                                </span>
-                                            </div>
+                                            {cart.map((item) => {
+                                                return (
+                                                    <div className={cx('cart-item')}>
+                                                        <img className={cx('cart-image')} src={item.image}></img>
+                                                        <div className={cx('cart-box')}>
+                                                            <p className={cx('cart-name')}>{item.name}</p>
+                                                            <p className={cx('cart-price')}>
+                                                                {new Intl.NumberFormat('vi-VN', {
+                                                                    style: 'currency',
+                                                                    currency: 'VND',
+                                                                }).format(item.price)}
+                                                            </p>
+                                                        </div>
+                                                        <p className={cx('cart-close')}>
+                                                            <FontAwesomeIcon icon={faClose}></FontAwesomeIcon>
+                                                        </p>
+                                                    </div>
+                                                );
+                                            })}
                                         </Popper>
                                     </div>
                                 </div>
                             )}
                         >
-                            <a count="4" className={cx('cart')} to="./shop">
+                            <a count={cart.length} className={cx('cart')} to="./shop">
                                 Cart <FontAwesomeIcon icon={faCartPlus}></FontAwesomeIcon>
                             </a>
                         </TippyHeadless>

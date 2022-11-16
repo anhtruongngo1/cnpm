@@ -1,15 +1,15 @@
 import Header from './Header/Header';
-import Container from './Container/Container';
 import Footer from './Footer/Footer';
 
-function Home() {
+function Defaultlayout({ children }) {
     return (
         <>
             <Header>Header</Header>
-            <Container>Container</Container>
+            {children}
+            {/* <Container>Container</Container> */}
             <Footer>Footer</Footer>
         </>
     );
 }
 
-export default Home;
+export default Defaultlayout;
