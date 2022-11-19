@@ -7,9 +7,9 @@ import bg4 from '~/assets/background/home4.jpg';
 import bg5 from '~/assets/background/home5.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import Defaultlayout from '../Defaultlayout/Defaultlayout';
+import Defaultlayout from '../../Defaultlayout/Defaultlayout';
 import { IconCircle } from '~/components/Icons/Icons';
-import Image from '../Defaultlayout/Image';
+import Image from '../../Defaultlayout/Image';
 import { lazy, useEffect } from 'react';
 
 const cx = classNames.bind(styles);

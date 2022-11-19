@@ -7,11 +7,12 @@ import { faMagnifyingGlass, faCartPlus, faSearch, faSpinner, faClose } from '@fo
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import TippyHeadless from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
+import axios from 'axios';
+
 import 'tippy.js/dist/tippy.css';
 import logo from '../../../assets/logo/logo.jpg';
 import Modal from '~/Modal';
 import Popper from '~/components/GlobalStyles/Popper';
-import useGetAxios from '~/components/Hooks/useGetAxios';
 
 const cx = classNames.bind(styles);
 
@@ -22,22 +23,14 @@ function Header({ children }) {
     const [cart, setCart] = useState([]);
 
     const ref_Header = useRef();
-    const data = useGetAxios('http://localhost:3000/cart');
 
     useEffect(() => {
-        // setCart(data);
-        console.log(data);
+        const get = async () => {
+            const res = await axios.get('http://localhost:3000/cart');
+            setCart(res.data);
+        };
+        get();
     }, []);
-
-    // useEffect(() => {
-    //     window.onscroll = () => {
-    //         window.scrollY < 140
-    //             ? (ref_Header.current.style.transform = 'translateY(0)')
-    //             : (ref_Header.current.style.transform = 'translateY(-130px)');
-
-    //         setScrollY(window.scrollY);
-    //     };
-    // }, [scrollY]);
 
     return (
         <>
@@ -51,10 +44,10 @@ function Header({ children }) {
                         <div className={cx('logo')}>
                             <img src={logo}></img>
                         </div>
-                        <Link to="./">Home</Link>
-                        <Link to="./shop">Shop</Link>
-                        <Link to="./about">About</Link>
-                        <Link to="./blog">Blog</Link>
+                        <Link to="/">Home</Link>
+                        <Link to="/shop">Shop</Link>
+                        <Link to="/about">About</Link>
+                        <Link to="/blog">Blog</Link>
                     </div>
                     <div className={cx('inner-end')}>
                         {showInput && (
