@@ -26,10 +26,9 @@ function Container() {
             let observer = new IntersectionObserver(
                 (entries) => {
                     entries.forEach((entry) => {
-                        console.log(('checkkk', entry.isIntersecting));
                         if (entry.isIntersecting) {
                             load(entry.target);
-                            observer.unobserver();
+                            // observer.unobserver();
                         }
                     });
                 },

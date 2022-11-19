@@ -3,14 +3,7 @@ import styles from './Header.module.scss';
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faMagnifyingGlass,
-    faCartPlus,
-    faSearch,
-    faSpinner,
-    faArrowUp,
-    faClose,
-} from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faCartPlus, faSearch, faSpinner, faClose } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 import TippyHeadless from '@tippyjs/react/headless';
 import Tippy from '@tippyjs/react';
@@ -18,7 +11,7 @@ import 'tippy.js/dist/tippy.css';
 import logo from '../../../assets/logo/logo.jpg';
 import Modal from '~/Modal';
 import Popper from '~/components/GlobalStyles/Popper';
-import axios from 'axios';
+import useGetAxios from '~/components/Hooks/useGetAxios';
 
 const cx = classNames.bind(styles);
 
@@ -29,14 +22,11 @@ function Header({ children }) {
     const [cart, setCart] = useState([]);
 
     const ref_Header = useRef();
+    const data = useGetAxios('http://localhost:3000/cart');
 
     useEffect(() => {
-        const getCart = async () => {
-            const res = await axios.get('http://localhost:3000/cart');
-            console.log(res.data);
-            setCart(res.data);
-        };
-        getCart();
+        // setCart(data);
+        console.log(data);
     }, []);
 
     // useEffect(() => {
@@ -134,7 +124,7 @@ function Header({ children }) {
                         </Tippy>
 
                         <TippyHeadless
-                            visible
+                            // visible
                             placement="bottom"
                             interactive
                             offset={[0, 20]}
@@ -145,7 +135,7 @@ function Header({ children }) {
                                             <h1 className={cx('cart-title')}>Sản phẩm đã thêm</h1>
                                             {cart.map((item) => {
                                                 return (
-                                                    <div className={cx('cart-item')}>
+                                                    <div key={item.id} className={cx('cart-item')}>
                                                         <img className={cx('cart-image')} src={item.image}></img>
                                                         <div className={cx('cart-box')}>
                                                             <p className={cx('cart-name')}>{item.name}</p>
