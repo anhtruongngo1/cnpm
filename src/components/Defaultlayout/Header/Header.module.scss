@@ -6,6 +6,11 @@
     height: 130px;
     transition: all 0.6s ease-in-out;
     z-index: 999;
+    a {
+        &:hover {
+            color: #000;
+        }
+    }
     .top {
         display: flex;
         justify-content: space-between;
@@ -192,6 +197,7 @@
                 display: -webkit-box;
                 -webkit-box-orient: vertical;
                 -webkit-line-clamp: 1;
+                margin-bottom: 0;
                 // line-height: 60px;
             }
             .cart-price {
