@@ -97,6 +97,8 @@
                     align-items: center;
                     justify-content: space-around;
                     height: 60px;
+                    padding: 0 10px;
+                    margin-bottom: 10px;
                     img {
                         width: 50px;
                         height: 80%;
@@ -106,6 +108,11 @@
                         font-weight: 500;
                         font-size: 1.8rem;
                         overflow: hidden;
+                        text-align: left;
+                        margin: 0 10px;
+                        display: -webkit-box;
+                        -webkit-box-orient: vertical;
+                        -webkit-line-clamp: 2;
                     }
                     .price {
                         font-weight: 600;
@@ -134,11 +141,14 @@
                     position: absolute;
                     width: 20px;
                     height: 20px;
-                    font-size: 1.6rem;
+                    padding: 2px 0;
+                    font-size: 1.4rem;
                     line-height: 20px;
                     border-radius: 100%;
-                    top: -5px;
-                    right: -16px;
+                    background-color: skyblue;
+                    color: #fff;
+                    top: -10px;
+                    right: -14px;
                 }
             }
         }

@@ -4,12 +4,13 @@
     justify-content: center;
     position: relative;
     position: fixed;
-    background-color: rgba(134, 131, 131, 0.3);
+    background-color: rgba(243, 241, 241, 0.4);
     width: 100%;
     top: 0;
     right: 0;
-    top: 0;
+    left: 0;
     bottom: 0;
+    z-index: 999;
 
     .close {
         cursor: pointer;
@@ -17,7 +18,7 @@
         font-size: 4rem;
         font-weight: 600;
         color: rgb(12, 12, 12);
-        right: 30px;
+        right: 80px;
         top: 30px;
     }
 }

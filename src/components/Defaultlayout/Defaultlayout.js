@@ -4,10 +4,9 @@ import Footer from './Footer/Footer';
 function Defaultlayout({ children }) {
     return (
         <>
-            <Header>Header</Header>
+            <Header></Header>
             {children}
-            {/* <Container>Container</Container> */}
-            <Footer>Footer</Footer>
+            <Footer></Footer>
         </>
     );
 }
