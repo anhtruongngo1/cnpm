@@ -32,7 +32,6 @@ function Manager() {
     return (
         <>
         <div className="Manager-body">
-         
             <div className="Manager-body-manager">
                 <div className="manager-manager-body ">
                     <h3>Công cụ</h3>
@@ -50,7 +49,7 @@ function Manager() {
                         className={isActive === "FILM" ? "manager-manager-item active" : "manager-manager-item" }
                     >
                     <ImFilm  className="Manager-body-icon" />
-                       <span> Quản lí Film </span>
+                       <span> Quản lí sản phẩm </span>
                     </li>
                     {/* <li onClick={() => setActive("MUSIC")}
                         className={isActive === "MUSIC" ? "manager-manager-item active" : "manager-manager-item" }
