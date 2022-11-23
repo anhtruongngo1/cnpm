@@ -5,8 +5,10 @@ import { IoMdAddCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import ModalEditFilm from "./Modal/ModalEditFilm"
-// import Pagination from "./table/Pagination"
+import ModalEditFilm from "./Modal/ModalEditFilm" ;
+import { handleAllProduct } from '~/Services/adminServices';
+ import Pagination from "./table/Pagination"
+import Image from '../Defaultlayout/Image';
 
 function ManagerFilm() {
   const [dataFilm, setDataFilm] = useState([])
@@ -14,11 +16,25 @@ function ManagerFilm() {
   const [isShowModalEdit, setisShowModalEdit] = useState(false)
   const [isDataSend, setDataSend] = useState([])
   const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage, setPostsPerPage] = useState(6);
+  const [postsPerPage, setPostsPerPage] = useState(3);
   useEffect(() => {
- 
+    handleData()
+  
+    
 
   }, [isShowModal , isShowModalEdit])
+
+  const handleData = async() =>{
+    let res = await handleAllProduct()
+
+    if (res.length > 0) {
+      setDataFilm(
+       res
+      )
+    }
+  }
+
+
   const closeModal = () => {
     setisShowModal(!isShowModal)
   }
@@ -45,20 +61,20 @@ function ManagerFilm() {
           <IoMdAddCircle
             className="manager-user-icons-icon"
             onClick={() => handleShowModal()} />
-              <span> Thêm mới film</span>
+              <span> Thêm mới Sản phẩm</span>
           </div>
-      <h3>Danh sách film</h3>
+      <h3>Danh sách Sản phẩm</h3>
       <table className="table ">
         <thead>
           <tr>
-            <th scope="col">ID film</th>
-            <th scope="col">Tên film</th>
-            <th scope="col">Hình ảnh</th>
-            <th scope="col">Year</th>
-            <th scope="col">Ngày tạo</th>
-            <th scope="col">Ngày cập nhât</th>
-            <th scope="col">view</th>
-            <th scope="col">actions</th>
+            <th scope="col">ID </th>
+            <th scope="col">Tên sp</th>
+            <th scope="col">Hình</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Ngày</th>
+            <th scope="col">View</th>
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -69,12 +85,12 @@ function ManagerFilm() {
                 <th scope="row"> {item.id}</th>
                 <td>{ item.name} </td>
                 <td>
-                <img href="" alt="" src={item.image} />
+                <Image href="" alt="" src={item.image} />
                 </td>
-                <td>{ item.yearData.value}</td>
-                <td>{ item.createdAt}</td>
+                <td>{ item.description}</td>
+                <td>{ item.price}</td>
                 <td>
-                  {item.updatedAt}
+                 
                 </td>
                 <td>
                   <span >Chi tiết</span>
@@ -101,10 +117,10 @@ function ManagerFilm() {
 
         </tbody>
       </table>
-      {/* <Pagination postsPerPage={postsPerPage}
+      <Pagination postsPerPage={postsPerPage}
         totalPosts={dataFilm.length}
         Paginate = {Paginate}
-      /> */}
+      />
 
 
 

@@ -5,6 +5,8 @@ import { FiEye, FiEyeOff } from 'react-icons/fi';
 import { useState } from 'react';
 import '../auth/Register.scss';
 import { IconFace, IconGoogle, IconIns } from '../Icons/Icons';
+
+import {handleRegister} from "~/Services/adminServices"
 function Register() {
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [notify, setnotify] = useState(false);
@@ -26,13 +28,18 @@ function Register() {
                 .oneOf([yup.ref('password')], 'phải trùng với password'),
         }),
         onSubmit: async (values) => {
-            console.log('check values', values.email);
+            handleRegister({
+                username : values.userName ,
+                email : values.email ,
+                password : values.confirmedPassword
+            })
         },
     });
 
     const handleShowPassword = () => {
         setIsShowPassword(!isShowPassword);
     };
+  
 
     return (
         <>

@@ -20,22 +20,22 @@ function ModalEdit(props) {
     previewUrl: ''
   })
   useEffect(() => {
-    // let res = getAllGender()
-    // let data = res.then((data) => {
-    //   if (data && data.errCode === 0) {
-    //     setForm({
-    //       firstName: props.isDataSend.firstName,
-    //       lastName: props.isDataSend.lastName,
-    //       password: "123456",
-    //       email: props.isDataSend.email,
-    //       genderAll: data.dataGender,
-    //       roleAll: data.dataRole,
-    //       role: props.isDataSend.roleId,
-    //       gender: props.isDataSend.gender,
-    //       previewUrl: props.isDataSend.image
-    //     })
-    //   }
-    // })
+    //let res = getAllGender()
+   // let data = res.then((data) => {
+     // if (data && data.errCode === 0) {
+        setForm({
+          firstName: props.isDataSend.firstName,
+          lastName: props.isDataSend.lastName,
+          password: "123456",
+          email: props.isDataSend.email,
+         // genderAll: data.dataGender,
+          //roleAll: data.dataRole,
+         // role: props.isDataSend.roleId,
+          //gender: props.isDataSend.gender,
+          //previewUrl: props.isDataSend.image
+        })
+     
+   // })
 
   }, [props])
   // const handleOnchangeImg = async (e) => {

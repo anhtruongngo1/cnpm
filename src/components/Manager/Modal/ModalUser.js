@@ -3,6 +3,7 @@ import "../Modal/Modal.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
 import upload1 from "../../../assets/upload.png";
+import { handleRegister } from '~/Services/adminServices';
 function ModalUser(props) {
 
   const [form, setForm] = useState({
@@ -33,39 +34,43 @@ function ModalUser(props) {
     // })
 
   }, [])
-  const handleOnchangeImg = async (e) => {
-    let data = e.target.files;
-    let file = data[0];
-    if (file) {
-      let base64 = await CommonUtils.getBase64(file);
-      let objectUrl = URL.createObjectURL(file);
-      setForm({
-        ...form,
-        previewUrl: objectUrl,
-        image: base64
-
-      })
-    }
-
-  // }
-  // const handleSaveUser = async () => {
-  //   let res = await registerUser(form)
-  //   if (res && res.errCode === 0) {
-      
+  // const handleOnchangeImg = async (e) => {
+  //   let data = e.target.files;
+  //   let file = data[0];
+  //   if (file) {
+  //     let base64 = await CommonUtils.getBase64(file);
+  //     let objectUrl = URL.createObjectURL(file);
   //     setForm({
   //       ...form,
-  //       firstName: '',
-  //       lastName: '',
-  //       password: '',
-  //       email: '',
-  //       image: '',
-  //       previewUrl: ''
+  //       previewUrl: objectUrl,
+  //       image: base64
+
   //     })
-  //     props.closeModal()
   //   }
 
   // }
-  // console.log('check', form);
+  const handleSaveUser = async () => {
+    let res = await handleRegister({
+      username : form.lastName + form.firstName ,
+      email : form.email ,
+      password : form.password
+    })
+    if (res ) {
+      
+      setForm({
+        ...form,
+        firstName: '',
+        lastName: '',
+        password: '',
+        email: '',
+        image: '',
+        previewUrl: ''
+      })
+      props.closeModal()
+    }
+
+  }
+  console.log('check', form);
 
   return (
     <>
@@ -137,9 +142,10 @@ function ModalUser(props) {
                 name="email"
               />
             </div>
+            
 
           </div>
-          <div className="modal-User" >
+          {/* <div className="modal-User" >
             <div className="modal-User-item">
               <label>role</label>
               <select
@@ -157,8 +163,8 @@ function ModalUser(props) {
               </select>
             </div>
 
-          </div>
-          <div className="modal-User" >
+          </div> */}
+          {/* <div className="modal-User" >
             <div className="modal-User-item  modal-User-item-content">
               <input id="previewImg"
                 type="file"
@@ -175,9 +181,9 @@ function ModalUser(props) {
                 <img height="100%;" alt="" src={form.previewUrl} />
               </div>
             </div>
-          </div>
+          </div> */}
           <button
-            // onClick={()=>handleSaveUser()}
+           onClick={()=>handleSaveUser()}
             className="modal-user-btn">Save</button>
           <button
              onClick={props.closeModal}

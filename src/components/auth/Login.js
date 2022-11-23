@@ -6,6 +6,7 @@ import '../auth/Login.scss';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { IconFace, IconGoogle, IconIns } from '../Icons/Icons';
+import {handleLogin} from "~/Services/adminServices"
 
 function Login() {
     const [notify, setnotify] = useState('');
@@ -25,8 +26,29 @@ function Login() {
         }),
         onSubmit: async (values) => {
             console.log('check values', values);
+            handleLoginUser(values)
         },
     });
+
+    const handleLoginUser = async (values) =>{
+        let res = await handleLogin()
+
+        if(res){
+            const datauserName = res.find(item => item.username === values.userName )
+
+            if(datauserName){
+                const dataPass = res.find(item =>item.username === values.userName && item.password === values.password )
+                if(dataPass){
+                    setnotify('đăng nhập thành công')
+                    navigate("/shop")
+                }else{
+                    setnotify("sai mật khẩu")
+                }
+            }else{
+                setnotify("UserName không tồn tại")
+            }
+        }
+    }
 
     const handleShowPassword = () => {
         setisShowPassword(!isShowPassword);

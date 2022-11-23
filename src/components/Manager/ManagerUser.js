@@ -4,8 +4,9 @@ import { RiDeleteBinFill } from "react-icons/ri"
 import { MdOutlineAutoFixHigh } from "react-icons/md"
 import { IoMdAddCircle } from "react-icons/io";
 import ModalUser from './Modal/ModalUser';
-import ModalEdit from "./Modal/ModalEdit"
-
+import ModalEdit from "./Modal/ModalEdit" ;
+import {handleAllUser} from "~/Services/adminServices" ;
+import Image from '../Defaultlayout/Image';
 
 function ManagerUser() {
   const [dataUser, setdataUser] = useState([])
@@ -14,10 +15,23 @@ function ManagerUser() {
   const [isDataSend, setDataSend] = useState([])
 
   useEffect(() => {
-
+    handleAll()
 
 
   }, [isShowModal , isShowModalEdit])
+
+  const handleAll =async () => {
+    const res = await handleAllUser()
+
+    if(res.length > 0){
+      setdataUser(res)
+    }
+    console.log('check22 ' , dataUser);
+
+  }
+
+
+
   const handleShowModal = () => {
     setisShowModal(!isShowModal)
   }
@@ -50,7 +64,7 @@ function ManagerUser() {
             <th scope="col">FirstName</th>
             <th scope="col">LastName</th>
             <th scope="col">Email</th>
-            <th scope="col">Gender</th>
+            <th scope="col">userName</th>
             <th scope="col">image</th>
             <th scope="col">role</th>
             <th scope="col">actions</th>
@@ -64,11 +78,11 @@ function ManagerUser() {
               <td>{item.firstName}</td>
               <td>{item.lastName}</td>
               <td>{item.email}</td>
-              <td>{item.genderData.value}</td>
+              <td>{item.username}</td>
               <td>
-                <img alt="" src={item.image} />
+                <Image alt="" src={""} />
               </td>
-              <td>{item.roleData.value}</td>
+              <td></td>
               <td>
                 <span className="manager-user-actions" onClick={() =>handleEditUser(item)} >
                   <MdOutlineAutoFixHigh />

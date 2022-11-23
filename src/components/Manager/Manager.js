@@ -51,25 +51,25 @@ function Manager() {
                     <ImFilm  className="Manager-body-icon" />
                        <span> Quản lí sản phẩm </span>
                     </li>
-                    {/* <li onClick={() => setActive("MUSIC")}
+                     {/* <li onClick={() => setActive("MUSIC")}
                         className={isActive === "MUSIC" ? "manager-manager-item active" : "manager-manager-item" }
                     >
                         <MdMusicVideo className="Manager-body-icon " />
                        <span> Quản lí Music </span>
-                    </li>
+                    </li> */}
                     <li onClick={() => setActive("CATEGORY")}
                         className={isActive === "CATEGORY" ? "manager-manager-item active" : "manager-manager-item" }
                     >
                         <MdMusicVideo className="Manager-body-icon" />
                         <span> Quản lí Loại</span>
-                    </li> */}
+                    </li> 
                 </div>
                 <div className="Manager-body-container" >
                 {isActive === "MANAGER" && <ManagerWeb />}
                 {isActive === "USER" && <ManagerUser />}
                 {isActive === "FILM" && <ManagerFilm />}
-                    {/* {isActive === "MUSIC" && <ManagerMusic />}
-              {isActive === "CATEGORY" && <ManagerCategory />} */}
+
+              {isActive === "CATEGORY" && <ManagerCategory /> }
                 </div>
                
             </div> 
