@@ -33,19 +33,19 @@ function ModalUser(props) {
     // })
 
   }, [])
-  // const handleOnchangeImg = async (e) => {
-  //   let data = e.target.files;
-  //   let file = data[0];
-  //   if (file) {
-  //     let base64 = await CommonUtils.getBase64(file);
-  //     let objectUrl = URL.createObjectURL(file);
-  //     setForm({
-  //       ...form,
-  //       previewUrl: objectUrl,
-  //       image: base64
+  const handleOnchangeImg = async (e) => {
+    let data = e.target.files;
+    let file = data[0];
+    if (file) {
+      let base64 = await CommonUtils.getBase64(file);
+      let objectUrl = URL.createObjectURL(file);
+      setForm({
+        ...form,
+        previewUrl: objectUrl,
+        image: base64
 
-  //     })
-  //   }
+      })
+    }
 
   // }
   // const handleSaveUser = async () => {
