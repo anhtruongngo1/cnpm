@@ -7,7 +7,7 @@ import styles from './ShopPage.module.scss';
 
 const cx = classNames.bind(styles);
 
-function QuickView({ detail, onClose }) {
+function QuickView({ handleAdd, detail, onClose }) {
     const inputRef = useRef();
     return (
         <div>
@@ -53,7 +53,14 @@ function QuickView({ detail, onClose }) {
                                 <FontAwesomeIcon icon={faChevronDown}></FontAwesomeIcon>
                             </button>
 
-                            <button className={cx('quick-add')}>Add to cart</button>
+                            <button
+                                onClick={() => {
+                                    handleAdd(detail);
+                                }}
+                                className={cx('quick-add')}
+                            >
+                                Add to cart
+                            </button>
                         </div>
                         <span className={cx('quick-code')}>{'SKU: 009'}</span>
                         <span className={cx('quick-cate')}>{'CATEGORY: FUNITURE'}</span>

@@ -44,7 +44,7 @@ function ShopPage() {
                         name: current.name,
                         price: current.price,
                         image: current.image,
-                        user_id : 9
+                        user_id: 9,
                     })
                     .then((res) => {
                         axios.get('http://localhost:3000/cart').then((res) => {
@@ -179,7 +179,11 @@ function ShopPage() {
                                             <div className={cx('product-cate')}>DINNERWARE</div>
                                         </div>
                                         {Object.entries(quickView).length !== 0 && (
-                                            <QuickView detail={quickView} onClose={() => setQuickView({})}></QuickView>
+                                            <QuickView
+                                                handleAdd={handleAdd}
+                                                detail={quickView}
+                                                onClose={() => setQuickView({})}
+                                            ></QuickView>
                                         )}
                                     </div>
                                 );

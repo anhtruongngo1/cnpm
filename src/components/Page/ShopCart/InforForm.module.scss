@@ -1,53 +1,73 @@
-.wrapper{
+.wrapper {
     flex: 1;
     background-color: white;
-    margin-top: 30px;
     text-align: left;
     padding: 30px;
-
+    input {
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
 }
-.box-radio{
-    display: flex;
+.box {
     gap: 20px;
+    .options {
+        margin-right: 20px;
+    }
+}
+
+.box-radio {
+    display: flex;
     margin-bottom: 10px;
 }
-.box-input{
+.box-input {
     display: flex;
     gap: 20px;
-    input{
+    input {
         width: 50%;
-        padding: 5px ;
+        padding: 5px;
     }
     margin-bottom: 10px;
 }
-.box-descreption{
+.box-descreption {
     height: 300px;
-    input{
+    textarea {
         height: 100%;
         width: 100%;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 10px 10px;
+
+        &:focus {
+            outline: none;
+        }
     }
     margin-bottom: 10px;
 }
-.note{
+.note {
     font-weight: bold;
 }
-.time{
+.time {
     border: 1px solid #ccc;
-    color: red;
+    color: rgb(236, 65, 65);
     font-weight: bold;
     max-width: 300px;
     text-align: center;
     padding: 5px 0;
     border-radius: 10px;
 }
-.btn{
+.btn {
     padding: 15px 50px;
-    background-color: red;
     color: white;
+    background-color: rgb(241, 29, 29);
+
     border: none;
     border-radius: 5px;
     font-weight: bold;
     margin-top: 50px;
     text-align: left;
     margin-bottom: 30px;
+    font-size: 2.2rem;
+    &:hover {
+        opacity: 0.8;
+    }
 }
