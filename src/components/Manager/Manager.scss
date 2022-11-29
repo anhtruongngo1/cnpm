@@ -120,6 +120,8 @@
 
         .manager-user-body {
             margin-top: 30px;
+            background-color: white;
+            color           : black;
 
             .manager-user-icons {
                 font-size    : 25px;
@@ -190,6 +192,7 @@
                 font-size    : 25px;
                 float        : right;
                 margin-bottom: 10px;
+                padding-right: 10px;
 
                 .manager-film-icons-icon {
                     cursor: pointer;

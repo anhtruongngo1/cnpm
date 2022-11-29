@@ -9,6 +9,8 @@ import ModalEditFilm from "./Modal/ModalEditFilm" ;
 import { handleCategory } from '~/Services/adminServices';
  import Pagination from "./table/Pagination"
 import Image from '../Defaultlayout/Image';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 function ManagerCategory() {
   const [dataFilm, setDataFilm] = useState([])
@@ -54,6 +56,29 @@ function ManagerCategory() {
   const Paginate = (pageNumber) => {
       setCurrentPage(pageNumber)
   }
+  const handleDelete = (id) => {
+    swal({
+        title: 'Bạn có chắc chắn xóa?',
+        // text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            (async () => {
+                await axios.delete(` http://localhost:3000/accounts/${id}`);
+            })();
+            swal('Xóa thành công', {
+                icon: 'success',
+                buttons: false,
+                timer: 1000,
+            });
+            (async function a() {
+              handleData()
+            })();
+        }
+    });
+};
 
   return (
     <div className="manager-film-body ">
@@ -101,6 +126,7 @@ function ManagerCategory() {
                     <AiOutlineEdit />
                   </span>
                   <span 
+                  onClick={()=>handleDelete(item.id)}
                     className="manager-film-actions-icon">
                     <RiDeleteBin6Line />
                   </span>

@@ -107,3 +107,24 @@ export const handleCategory = async (data) =>{
             console.log(error);
     }
 }
+export const handleDeleteUser = async (id) =>{
+    try {
+        const res = await  httpRequest.get2('accounts/',{
+            
+                    params:{
+                        
+                        
+                    }
+        
+                }
+
+        
+        );
+        
+        return res
+
+        
+    } catch (error) {
+            console.log(error);
+    }
+}

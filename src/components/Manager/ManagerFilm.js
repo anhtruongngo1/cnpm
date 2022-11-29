@@ -9,6 +9,8 @@ import ModalEditFilm from "./Modal/ModalEditFilm" ;
 import { handleAllProduct } from '~/Services/adminServices';
  import Pagination from "./table/Pagination"
 import Image from '../Defaultlayout/Image';
+import axios from 'axios';
+import swal from 'sweetalert';
 
 function ManagerFilm() {
   const [dataFilm, setDataFilm] = useState([])
@@ -22,7 +24,7 @@ function ManagerFilm() {
   
     
 
-  }, [isShowModal , isShowModalEdit])
+  }, [isShowModal , isShowModalEdit ])
 
   const handleData = async() =>{
     let res = await handleAllProduct()
@@ -48,6 +50,29 @@ function ManagerFilm() {
     setisShowModalEdit(!isShowModalEdit)
     setDataSend(item)
   }
+  const handleDelete = (id) => {
+    swal({
+        title: 'Bạn có chắc chắn xóa?',
+        // text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            (async () => {
+                await axios.delete(` http://localhost:3000/products/${id}`);
+            })();
+            swal('Xóa thành công', {
+                icon: 'success',
+                buttons: false,
+                timer: 1000,
+            });
+            (async function a() {
+              handleData()
+            })();
+        }
+    });
+};
   const indexOfLastFilm = currentPage * postsPerPage;
   const indexOfFirstFilm = indexOfLastFilm - postsPerPage;
   const currentPosts = dataFilm.slice(indexOfFirstFilm, indexOfLastFilm)
@@ -100,7 +125,7 @@ function ManagerFilm() {
                     className="manager-film-actions-icon"> 
                     <AiOutlineEdit />
                   </span>
-                  <span 
+                  <span onClick={()=>handleDelete(item.id)}
                     className="manager-film-actions-icon">
                     <RiDeleteBin6Line />
                   </span>

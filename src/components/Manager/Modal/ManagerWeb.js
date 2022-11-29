@@ -16,8 +16,8 @@ function ManagerWeb() {
                 
         <div className="manager-web-content"> 
             <span className="manager-web-content-span1">Lượt xem trang : 1</span>
-                    <span className="manager-web-content-span2">Số lương film : 1</span>
-            <span  className="manager-web-content-span3">Số lượng thể loại : 1</span>
+                    <span className="manager-web-content-span2">Số lượng sản phẩm : 34</span>
+            <span  className="manager-web-content-span3">Số lượng thể loại : 10</span>
             <span  className="manager-web-content-span4">Số lượng thẻ tạo : 1</span>
             
         </div>

@@ -5,14 +5,21 @@ import { MdOutlineAutoFixHigh } from "react-icons/md"
 import { IoMdAddCircle } from "react-icons/io";
 import ModalUser from './Modal/ModalUser';
 import ModalEdit from "./Modal/ModalEdit" ;
-import {handleAllUser} from "~/Services/adminServices" ;
+import {handleAllUser , handleDeleteUser} from "~/Services/adminServices" ;
 import Image from '../Defaultlayout/Image';
+import swal from 'sweetalert';
+import axios from 'axios';
+import Pagination from "./table/Pagination"
+
+
 
 function ManagerUser() {
   const [dataUser, setdataUser] = useState([])
   const [isShowModal, setisShowModal] = useState(false)
   const [isShowModalEdit, setisShowModalEdit] = useState(false)
   const [isDataSend, setDataSend] = useState([])
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(3);
 
   useEffect(() => {
     handleAll()
@@ -45,7 +52,35 @@ function ManagerUser() {
     setisShowModalEdit(!isShowModalEdit)
     setDataSend(item)
    }
-  
+   const handleDelete = (id) => {
+    swal({
+        title: 'Bạn có chắc chắn xóa?',
+        // text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            (async () => {
+                await axios.delete(` http://localhost:3000/accounts/${id}`);
+            })();
+            swal('Xóa thành công', {
+                icon: 'success',
+                buttons: false,
+                timer: 1000,
+            });
+            (async function a() {
+              handleAll()
+            })();
+        }
+    });
+};
+const indexOfLastFilm = currentPage * postsPerPage;
+const indexOfFirstFilm = indexOfLastFilm - postsPerPage;
+const currentPosts = dataUser.slice(indexOfFirstFilm, indexOfLastFilm)
+const Paginate = (pageNumber) => {
+    setCurrentPage(pageNumber)
+}
 
 
   return (
@@ -88,7 +123,8 @@ function ManagerUser() {
                   <MdOutlineAutoFixHigh />
 
                 </span>
-                <span className="manager-user-actions" >
+                <span className="manager-user-actions"  onClick={() =>handleDelete(item.id)}>
+                  
                   <RiDeleteBinFill />
 
                 </span>
@@ -101,6 +137,10 @@ function ManagerUser() {
 
         </tbody>
       </table>
+      <Pagination postsPerPage={postsPerPage}
+        totalPosts={dataUser.length}
+        Paginate = {Paginate}
+      />
          
       </div>
       <ModalUser
