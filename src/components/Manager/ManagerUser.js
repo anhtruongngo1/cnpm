@@ -9,7 +9,8 @@ import {handleAllUser , handleDeleteUser} from "~/Services/adminServices" ;
 import Image from '../Defaultlayout/Image';
 import swal from 'sweetalert';
 import axios from 'axios';
-import Pagination from "./table/Pagination"
+import Pagination from "./table/Pagination";
+
 
 
 
@@ -75,6 +76,12 @@ function ManagerUser() {
         }
     });
 };
+
+
+
+
+
+
 const indexOfLastFilm = currentPage * postsPerPage;
 const indexOfFirstFilm = indexOfLastFilm - postsPerPage;
 const currentPosts = dataUser.slice(indexOfFirstFilm, indexOfLastFilm)

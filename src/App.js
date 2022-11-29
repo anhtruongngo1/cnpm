@@ -5,6 +5,7 @@ import ShopPage from './components/Page/ShopPage';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Manager from './components/Manager/Manager';
+import LayoutBuy from './components/Page/ShopCart/LayoutBuy';
 
 function App() {
     return (
@@ -16,6 +17,7 @@ function App() {
                     <Route element={<Register />} path="/auth/register" />
                     <Route element={<ShopPage />} path="/shop" />
                     <Route element={<Manager />} path="/manager" />
+                    <Route element={<LayoutBuy />} path="/order" />
                 </Routes>
             </div>
         </BrowserRouter>

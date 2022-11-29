@@ -9,6 +9,7 @@ import { ImFilm } from "react-icons/im";
 import { MdMusicVideo } from "react-icons/md"
 import { GrOverview } from "react-icons/gr";
 import ManagerCategory from './ManagerCategory';
+import ManagerOrder from './ManagerOrder';
 // import { useSelector } from 'react-redux';
 // import {useNavigate} from "react-router-dom"
 
@@ -51,23 +52,24 @@ function Manager() {
                     <ImFilm  className="Manager-body-icon" />
                        <span> Quản lí sản phẩm </span>
                     </li>
-                     {/* <li onClick={() => setActive("MUSIC")}
-                        className={isActive === "MUSIC" ? "manager-manager-item active" : "manager-manager-item" }
-                    >
-                        <MdMusicVideo className="Manager-body-icon " />
-                       <span> Quản lí Music </span>
-                    </li> */}
                     <li onClick={() => setActive("CATEGORY")}
                         className={isActive === "CATEGORY" ? "manager-manager-item active" : "manager-manager-item" }
                     >
                         <MdMusicVideo className="Manager-body-icon" />
                         <span> Quản lí Loại</span>
                     </li> 
+                     <li onClick={() => setActive("ORDER")}
+                        className={isActive === "ORDER" ? "manager-manager-item active" : "manager-manager-item" }
+                    >
+                        <MdMusicVideo className="Manager-body-icon " />
+                       <span> Quản lí đơn hàng </span>
+                    </li>
                 </div>
                 <div className="Manager-body-container" >
                 {isActive === "MANAGER" && <ManagerWeb />}
                 {isActive === "USER" && <ManagerUser />}
                 {isActive === "FILM" && <ManagerFilm />}
+                {isActive === "ORDER" && <ManagerOrder />}
 
               {isActive === "CATEGORY" && <ManagerCategory /> }
                 </div>

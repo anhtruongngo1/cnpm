@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import "../Modal/Modal.scss";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Modal, ModalBody, ModalHeader } from 'reactstrap';
+import swal from 'sweetalert';
+import axios from 'axios';
+import { handleRegister } from '~/Services/adminServices';
 // import CommonUtils from "../../commantUtils/CommonUtils"
 import upload1 from "../../../assets/upload.png";
 // import { getAllGender, handleEditUser } from "../../service/service";
@@ -71,6 +74,51 @@ function ModalEdit(props) {
 
   // }
   // console.log('check datasend', form);
+  const handleUpdateUser = (id) => {
+    swal({
+        title: 'Bạn có chắc chắn muốn cập nhật?',
+        // text: "Once deleted, you will not be able to recover this imaginary file!",
+        icon: 'warning',
+        buttons: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete) {
+            (async () => {
+              handleSaveUser()
+                await axios.delete(` http://localhost:3000/accounts/${id}`);
+            })();
+            swal('update thành công', {
+                icon: 'success',
+                buttons: false,
+                timer: 1000,
+            });
+            (async function a() {
+              
+            })();
+        }
+    });
+};
+const handleSaveUser = async () => {
+  let res = await handleRegister({
+    username : form.lastName + form.firstName ,
+    email : form.email ,
+    password : form.password
+  })
+  if (res ) {
+    
+    setForm({
+      ...form,
+      firstName: '',
+      lastName: '',
+      password: '',
+      email: '',
+      image: '',
+      previewUrl: ''
+    })
+    props.closeModal()
+  }
+
+}
 
   return (
     <>
@@ -183,7 +231,7 @@ function ModalEdit(props) {
             </div>
           </div>
           <button
-          //  onClick={() => handleUpdateUser()}
+            onClick={() => handleUpdateUser(props.isDataSend.id)}
             className="modal-user-btn">Update</button>
           <button
             onClick={props.closeModalEdit}

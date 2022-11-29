@@ -15,10 +15,14 @@ import Modal from '~/Modal';
 import { CartCountContext } from '../../Page/ShopPage';
 import useDebounce from '~/components/Hooks/useDebounce';
 import Popper from '~/components/GlobalStyles/Popper';
+import { useNavigate } from 'react-router-dom';
+
 
 const cx = classNames.bind(styles);
 
 function Header() {
+    const navigate = useNavigate();
+
     const [hideResult, setHideResule] = useState(true);
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
@@ -203,9 +207,12 @@ function Header() {
                                                             >
                                                                 <FontAwesomeIcon icon={faClose}></FontAwesomeIcon>
                                                             </p>
+                                                           
                                                         </div>
                                                     );
                                                 })}
+                                                 <button onClick={()=> navigate("/order")}
+                                                  className={cx('cart-pay')}>THANH TOÁN</button>
                                             </Popper>
                                         </div>
                                     </div>

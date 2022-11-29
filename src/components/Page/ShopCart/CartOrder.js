@@ -1,0 +1,98 @@
+import { faTrashCan } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames/bind";
+import { useEffect, useState } from "react";
+import Image from "~/components/Defaultlayout/Image";
+import styles from "./LayoutBuy.module.scss" ;
+import axios from 'axios';
+
+
+
+
+const cx = classNames.bind(styles)
+
+function CartOrder({data = [] , handleTotal  }) {
+    const [dataCart , setDataCart] = useState([])
+
+    useEffect(()=>{
+        handleCart()
+    },[])
+    const handleCart = async() =>{
+        const res = await axios.get('http://localhost:3000/cart');
+        if(res && res.data.length > 0){
+            setDataCart(res.data)
+        }
+    }
+    const total = dataCart.reduce((acc , current , currentI)=>{
+        handleTotal(acc + current.price)
+        return acc + current.price
+
+    },0)
+    console.log('checkkk' , total);
+
+
+    return (
+    <div  className={cx('cart')}>
+        <h4 className={cx('title')}>Giỏ hàng của bạn</h4>
+        {   dataCart.map((item , index) =>(
+                <div  className={cx('item')} key={item.id}>
+                <div  className={cx('image')}>
+                    <Image src={item.image}  className={cx('image-icon')}/>
+    
+                </div>
+                <div  className={cx('box')}>
+                    <h5 className={cx('box-title')}>{item && item.name  ? item.name : ''}</h5>
+                    <div  className={cx('box-item')}>
+                        <strong  className={cx('price')}> 
+                            {item && item.price  ? item.price : ''}
+                        </strong>
+                        <span className={cx('price-order')}>1000.000</span>
+    
+                    </div>
+                    <div  className={cx('box-action')}>
+    
+                        <div  className={cx('action-icon')}>
+                            <FontAwesomeIcon icon={faTrashCan}   />
+                            Xóa
+    
+                        </div>
+                        <div  className={cx('action-input')}> 
+                                <span>Số lượng</span>
+                                <input type="number" name="points" min="0" max="10" step="1" value="30" />
+    
+                        </div>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+
+            ))}
+      
+        <div className={cx('discount')}>
+            Dùng mã giảm giá
+
+        </div>
+        <div  className={cx('pay')}> 
+        <h3 className={cx('pay-title')}>Tạm tính</h3>
+        <strong>{total} VND</strong>
+
+        </div>
+        <div  className={cx('pay')}> 
+        <h3 className={cx('pay-title')}>Phí vận chuyển</h3>
+        <strong>0</strong>
+
+        </div>
+        <div  className={cx('pay')}> 
+        <h3 className={cx('pay-title')}>Tổng cộng</h3>
+        <strong>{total} VND</strong>
+
+        </div>
+
+
+    </div> 
+    );
+}
+
+export default CartOrder;

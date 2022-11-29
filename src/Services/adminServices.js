@@ -37,6 +37,26 @@ export const handleRegister = async (data) =>{
             console.log(error);
     }
 }
+export const handleUpdateOrder = async (data) =>{
+    try {
+        const res = await  httpRequest.post('order',
+        {
+            infor : data.fullname ,
+            address : data.address ,
+            status : data.status ,
+            price : data.price ,
+            sdt : data.sdt
+
+        }
+        );
+
+        return res
+
+        
+    } catch (error) {
+            console.log(error);
+    }
+}
 export const handleAllUser = async (data) =>{
     try {
         const res = await  httpRequest.get('accounts'
@@ -98,6 +118,18 @@ export const handleAddProduct = async (data) =>{
 export const handleCategory = async (data) =>{
     try {
         const res = await  httpRequest.get('category'
+        );
+        
+        return res
+
+        
+    } catch (error) {
+            console.log(error);
+    }
+}
+export const handleOrder = async (data) =>{
+    try {
+        const res = await  httpRequest.get('order'
         );
         
         return res

@@ -44,6 +44,7 @@ function ShopPage() {
                         name: current.name,
                         price: current.price,
                         image: current.image,
+                        user_id : 9
                     })
                     .then((res) => {
                         axios.get('http://localhost:3000/cart').then((res) => {
