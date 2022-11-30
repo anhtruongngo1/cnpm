@@ -60,7 +60,7 @@ function CartOrder({ data = [], handleTotal }) {
                             </div>
                             <div className={cx('action-input')}>
                                 <span>Số lượng</span>
-                                <input type="number" name="points" min="0" max="10" step="1" value="10" />
+                                <input type="number" name="points" min="0" max="10" step="1" value="01" />
                             </div>
                         </div>
                     </div>

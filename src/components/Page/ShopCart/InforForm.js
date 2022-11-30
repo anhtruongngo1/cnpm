@@ -1,5 +1,6 @@
+import axios from 'axios';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './InforForm.module.scss';
 
 const cx = classNames.bind(styles);
@@ -10,6 +11,24 @@ function InforForm({ handleBtn }) {
     const [sdt, setSdt] = useState('');
     const [city, setCity] = useState('');
     const [address, setAddress] = useState('');
+    const [province, setProvince] = useState([]);
+    const [districts, setDistricts] = useState([]);
+
+    useEffect(() => {
+        const getProvince = async () => {
+            const res = await axios.get('https://provinces.open-api.vn/api/?depth=1');
+            setProvince(res.data);
+        };
+        getProvince();
+    }, []);
+
+    const HandleDistricts = (code) => {
+        const getDistrict = async () => {
+            const res = await axios.get(`https://provinces.open-api.vn/api/p/${code}?depth=2`);
+            setDistricts(res.data.districts);
+        };
+        getDistrict();
+    };
 
     return (
         <div className={cx('wrapper')}>
@@ -76,18 +95,47 @@ function InforForm({ handleBtn }) {
                 </div>
                 {check === 'HOME' ? (
                     <div className={cx('box-input')}>
-                        <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} />
+                        {/* <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} />
                         <input
                             placeholder="địa chỉ cụ thể"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                        />
+                        /> */}
+                        <select
+                            onChange={(e) => {
+                                setCity(e.target.value);
+                                HandleDistricts(e.target.value);
+                            }}
+                        >
+                            <option>--Thành phố--</option>
+                            {province.map((item) => {
+                                return (
+                                    <option key={item.code} value={item.code}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                        <select onChange={(e) => setAddress(e.target.value)}>
+                            <option>--Quận huyện--</option>
+                            {districts.map((item) => {
+                                return (
+                                    <option key={item.code} value={item.code}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                        <input placeholder="Địa chỉ cụ thể" />
                     </div>
                 ) : (
                     <></>
                 )}
                 <div className={cx('box-input')}>
-                    <input placeholder="Ghi chú thêm (không bắt buộc)" />
+                    <textarea
+                        style={{ width: '690px', outline: 'none', height: '150px' }}
+                        placeholder="Ghi chú thêm (không bắt buộc)"
+                    />
                 </div>
             </div>
             <p className={cx('note')}>Bằng cách thanh toán bằng đồng ý với điều khoản của chúng tôi</p>
