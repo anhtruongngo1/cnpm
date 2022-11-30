@@ -1,6 +1,6 @@
 import axios from 'axios';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './InforForm.module.scss';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
@@ -12,6 +12,35 @@ function InforForm({ handleBtn }) {
     const [check, setCheck] = useState('HOME');
     const [form, setform] = useState('1');
     const [address, setAddress] = useState('');
+    const [city, setCity] = useState('');
+
+    const formik = useFormik({
+        initialValues: {
+            fullname: '',
+            sdt: '',
+            city: '',
+            address: '',
+        },
+        validationSchema: yup.object({
+            fullname: yup.string().required('vui lòng nhập userName'),
+            sdt: yup.string().required('vui lòng nhập password'),
+            city: yup.string().required('vui lòng nhập password'),
+            address: yup.string().required('vui lòng nhập password'),
+        }),
+        onSubmit: async (values, { resetForm }) => {
+            console.log('check values', values);
+            handleBtn({
+                fullname: values.fullname,
+                sdt: values.sdt,
+                city: values.city,
+                address: values.address,
+            });
+            resetForm({});
+            setform({});
+        },
+    });
+    console.log('check formik', formik.values);
+    useEffect(() => {}, [form]);
 
     return (
         <div className={cx('wrapper')}>
