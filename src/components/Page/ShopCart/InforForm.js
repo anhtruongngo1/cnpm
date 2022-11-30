@@ -24,7 +24,7 @@ function InforForm({ handleBtn }) {
         getProvince();
     }, []);
 
-    const HandleDistricts = (code) => {
+    const HandleDistricts =async (code) => {
         const getDistrict = async () => {
             const res = await axios.get(`https://provinces.open-api.vn/api/p/${code}?depth=2`);
             setDistricts(res.data.districts);
@@ -37,6 +37,7 @@ function InforForm({ handleBtn }) {
             fullname: '',
             sdt: '',
             city: '',
+            district:"" ,
             address: '',
         },
         validationSchema: yup.object({
@@ -57,8 +58,19 @@ function InforForm({ handleBtn }) {
             setform({});
         },
     });
-    console.log('check formik', formik.values);
+    console.log('check formik', formik.values.city);
     useEffect(() => {}, [form]);
+    console.log('check' , );
+    const handleChageCity = (e) =>{
+        HandleDistricts(e.target.value);
+
+    }
+    if(formik.values.city && districts == ""){
+        HandleDistricts(formik.values.city);
+        
+    }
+    console.log('có rồi' , formik.values);
+
 
     return (
         <div className={cx('wrapper')}>
@@ -132,10 +144,9 @@ function InforForm({ handleBtn }) {
                     <div className={cx('box-input')}>
                         {/* <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} /> */}
                         <select
-                            onChange={(e) => {
-                                setCity(e.target.value);
-                                HandleDistricts(e.target.value);
-                            }}
+                        name='city'
+                            onChange={formik.handleChange}
+                            value={formik.city}
                         >
                             <option>--Thành phố--</option>
                             {province.map((item) => {
@@ -146,7 +157,12 @@ function InforForm({ handleBtn }) {
                                 );
                             })}
                         </select>
-                        <select onChange={(e) => setAddress(e.target.value)}>
+                        <select 
+                        name='district'
+                        onChange={formik.handleChange}
+                        value={formik.district}
+                        >
+                            
                             <option>--Quận huyện--</option>
                             {districts.map((item) => {
                                 return (
@@ -158,8 +174,9 @@ function InforForm({ handleBtn }) {
                         </select>
                         <input
                             placeholder="địa chỉ cụ thể"
-                            // value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                             value={formik.address}
+                            onChange={formik.handleChange}
+                            name="address"
                         />
                     </div>
                 ) : (
