@@ -1,15 +1,52 @@
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './InforForm.module.scss';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { Await } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function InforForm({ handleBtn }) {
     const [check, setCheck] = useState('HOME');
-    const [fullname, setFullname] = useState('');
-    const [sdt, setSdt] = useState('');
-    const [city, setCity] = useState('');
+    const [form, setform] = useState('1');
     const [address, setAddress] = useState('');
+
+
+    const formik = useFormik({
+        initialValues: {
+            fullname: '',
+            sdt: '',
+            city : '' ,
+            address : '' ,
+        },
+        validationSchema: yup.object({
+            fullname: yup.string().required('vui lòng nhập userName'),
+            sdt: yup.string().required('vui lòng nhập password'),
+            city: yup.string().required('vui lòng nhập password'),
+            address: yup.string().required('vui lòng nhập password'),
+        }),
+        onSubmit: async (values ,  { resetForm }) => {
+            console.log('check values', values);
+            handleBtn({
+                fullname : values.fullname,
+                sdt : values.sdt,
+                city : values.city,
+                address : values.address,
+            })
+            resetForm({})
+            setform({})
+            
+            
+           
+        },
+    });
+    console.log('check formik' , formik.values);
+    useEffect(() =>{
+
+    },[form])
+
+
 
     return (
         <div className={cx('wrapper')}>
@@ -27,8 +64,14 @@ function InforForm({ handleBtn }) {
                     </div>
                 </div>
                 <div className={cx('box-input')}>
-                    <input placeholder="Họ và tên" value={fullname} onChange={(e) => setFullname(e.target.value)} />
-                    <input placeholder="Số điện thoại" value={sdt} onChange={(e) => setSdt(e.target.value)} />
+                    <input placeholder="Họ và tên" 
+                    value={formik.fullname}
+                    name="fullname"
+                     onChange={formik.handleChange} />
+                    <input placeholder="Số điện thoại"
+                    name='sdt'
+                     value={formik.sdt}
+                      onChange={formik.handleChange} />
                 </div>
                 <div className={cx('box-descreption')}>
                     <textarea placeholder="Ghi chú thêm (không bắt buộc)" />
@@ -76,11 +119,16 @@ function InforForm({ handleBtn }) {
                 </div>
                 {check === 'HOME' ? (
                     <div className={cx('box-input')}>
-                        <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} />
+                        <input 
+                        placeholder="Thành phố" 
+                        name='city'
+                        value={formik.city} 
+                        onChange={formik.handleChange} />
                         <input
                             placeholder="địa chỉ cụ thể"
-                            value={address}
-                            onChange={(e) => setAddress(e.target.value)}
+                            name='address'
+                            value={formik.address}
+                            onChange={formik.handleChange}
                         />
                     </div>
                 ) : (
@@ -93,14 +141,7 @@ function InforForm({ handleBtn }) {
             <p className={cx('note')}>Bằng cách thanh toán bằng đồng ý với điều khoản của chúng tôi</p>
             <div className={cx('time')}>Giao hàng từ 1-3 ngày làm việc</div>
             <button
-                onClick={() =>
-                    handleBtn({
-                        fullname,
-                        sdt,
-                        city,
-                        address,
-                    })
-                }
+                 onClick={formik.handleSubmit}
                 className={cx('btn')}
             >
                 Thanh toán

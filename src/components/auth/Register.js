@@ -27,12 +27,13 @@ function Register() {
                 .required('vui lòng nhập lại password')
                 .oneOf([yup.ref('password')], 'phải trùng với password'),
         }),
-        onSubmit: async (values) => {
+        onSubmit: async (values, { resetForm }) => {
             handleRegister({
                 username : values.userName ,
                 email : values.email ,
                 password : values.confirmedPassword
             })
+            resetForm({})
         },
     });
 

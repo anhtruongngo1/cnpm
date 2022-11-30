@@ -5,6 +5,8 @@ import { useEffect, useState } from 'react';
 import Image from '~/components/Defaultlayout/Image';
 import styles from './LayoutBuy.module.scss';
 import axios from 'axios';
+import { handleDeleteUser } from '~/Services/adminServices';
+import swal from 'sweetalert';
 
 const cx = classNames.bind(styles);
 
@@ -25,6 +27,31 @@ function CartOrder({ data = [], handleTotal }) {
         return parseInt(acc) + parseInt(current.price);
     }, 0);
     console.log('checkkk', total);
+
+    const handleDelete = (id) => {
+        swal({
+            title: 'Bạn có chắc chắn xóa?',
+            // text: "Once deleted, you will not be able to recover this imaginary file!",
+            icon: 'warning',
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                (async () => {
+                    await axios.delete(` http://localhost:3000/cart/${id}`);
+                    handleCart()
+                })();
+                swal('Xóa thành công', {
+                    icon: 'success',
+                    buttons: false,
+                    timer: 1000,
+                });
+                (async function a() {
+                
+                })();
+            }
+        });
+    };
 
     return (
         <div className={cx('cart')}>
@@ -55,7 +82,8 @@ function CartOrder({ data = [], handleTotal }) {
                             </span>
                         </div>
                         <div className={cx('box-action')}>
-                            <div className={cx('action-icon')}>
+                            <div onClick={() => handleDelete(item.id)}
+                             className={cx('action-icon')}>
                                 <FontAwesomeIcon icon={faTrashCan} /> Xóa
                             </div>
                             <div className={cx('action-input')}>

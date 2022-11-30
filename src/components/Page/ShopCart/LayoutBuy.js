@@ -6,11 +6,14 @@ import styles from './LayoutBuy.module.scss';
 import swal from 'sweetalert';
 import axios from 'axios';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function LayoutBuy() {
     const [total, setTotal] = useState('');
+    const user_id = 9
+    const navigate = useNavigate()
 
     const handleOrder = (data) => {
         swal({
@@ -29,13 +32,16 @@ function LayoutBuy() {
                         sdt: data.sdt,
                         status: 'đang xác nhận',
                     });
+                    await axios.delete(`http://localhost:3000/cart/${user_id}`);
                 })();
                 swal('Mua thành công', {
                     icon: 'success',
                     buttons: false,
                     timer: 1000,
                 });
-                (async function a() {})();
+                (async function a() {
+                    navigate("/shop")
+                })();
             }
         });
     };
