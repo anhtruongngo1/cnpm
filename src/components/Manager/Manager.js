@@ -10,18 +10,19 @@ import { MdMusicVideo } from "react-icons/md"
 import { GrOverview } from "react-icons/gr";
 import ManagerCategory from './ManagerCategory';
 import ManagerOrder from './ManagerOrder';
-// import { useSelector } from 'react-redux';
-// import {useNavigate} from "react-router-dom"
+ import { useSelector } from 'react-redux';
+ import {useNavigate} from "react-router-dom"
 
 function Manager() {
 
     const [isActive, setActive] = useState("MANAGER")
-    // const userInfo = useSelector((state) => state.user.userInfor)
-    // const navigate = useNavigate()
+     const userInfo = useSelector((state) => state.user.currentUser)
+     console.log('check yser' , userInfo);
+     const navigate = useNavigate()
     useEffect(() => {
-        // if (!userInfo){
-        //     navigate("/login")
-        //   }
+         if (!userInfo){
+            navigate("/auth/login")
+           }
     }
     )
 

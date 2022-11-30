@@ -102,6 +102,7 @@ function Header() {
                         <Link to="/shop">Shop</Link>
                         <Link to="/about">About</Link>
                         <Link to="/blog">Blog</Link>
+                        <Link to="/manager">Manager</Link>
                     </div>
                     <div className={cx('inner-end')}>
                         {showInput && (

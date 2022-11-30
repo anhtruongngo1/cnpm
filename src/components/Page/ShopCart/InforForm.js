@@ -1,34 +1,17 @@
 import axios from 'axios';
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './InforForm.module.scss';
+import { useFormik } from 'formik';
+import * as yup from 'yup';
+import { Await } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 function InforForm({ handleBtn }) {
     const [check, setCheck] = useState('HOME');
-    const [fullname, setFullname] = useState('');
-    const [sdt, setSdt] = useState('');
-    const [city, setCity] = useState('');
+    const [form, setform] = useState('1');
     const [address, setAddress] = useState('');
-    const [province, setProvince] = useState([]);
-    const [districts, setDistricts] = useState([]);
-
-    useEffect(() => {
-        const getProvince = async () => {
-            const res = await axios.get('https://provinces.open-api.vn/api/?depth=1');
-            setProvince(res.data);
-        };
-        getProvince();
-    }, []);
-
-    const HandleDistricts = (code) => {
-        const getDistrict = async () => {
-            const res = await axios.get(`https://provinces.open-api.vn/api/p/${code}?depth=2`);
-            setDistricts(res.data.districts);
-        };
-        getDistrict();
-    };
 
     return (
         <div className={cx('wrapper')}>
@@ -46,8 +29,13 @@ function InforForm({ handleBtn }) {
                     </div>
                 </div>
                 <div className={cx('box-input')}>
-                    <input placeholder="Họ và tên" value={fullname} onChange={(e) => setFullname(e.target.value)} />
-                    <input placeholder="Số điện thoại" value={sdt} onChange={(e) => setSdt(e.target.value)} />
+                    <input
+                        placeholder="Họ và tên"
+                        value={formik.fullname}
+                        name="fullname"
+                        onChange={formik.handleChange}
+                    />
+                    <input placeholder="Số điện thoại" name="sdt" value={formik.sdt} onChange={formik.handleChange} />
                 </div>
                 <div className={cx('box-descreption')}>
                     <textarea placeholder="Ghi chú thêm (không bắt buộc)" />
@@ -95,38 +83,12 @@ function InforForm({ handleBtn }) {
                 </div>
                 {check === 'HOME' ? (
                     <div className={cx('box-input')}>
-                        {/* <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} />
+                        <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} />
                         <input
                             placeholder="địa chỉ cụ thể"
                             value={address}
                             onChange={(e) => setAddress(e.target.value)}
-                        /> */}
-                        <select
-                            onChange={(e) => {
-                                setCity(e.target.value);
-                                HandleDistricts(e.target.value);
-                            }}
-                        >
-                            <option>--Thành phố--</option>
-                            {province.map((item) => {
-                                return (
-                                    <option key={item.code} value={item.code}>
-                                        {item.name}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                        <select onChange={(e) => setAddress(e.target.value)}>
-                            <option>--Quận huyện--</option>
-                            {districts.map((item) => {
-                                return (
-                                    <option key={item.code} value={item.code}>
-                                        {item.name}
-                                    </option>
-                                );
-                            })}
-                        </select>
-                        <input placeholder="Địa chỉ cụ thể" />
+                        />
                     </div>
                 ) : (
                     <></>
@@ -140,17 +102,7 @@ function InforForm({ handleBtn }) {
             </div>
             <p className={cx('note')}>Bằng cách thanh toán bằng đồng ý với điều khoản của chúng tôi</p>
             <div className={cx('time')}>Giao hàng từ 1-3 ngày làm việc</div>
-            <button
-                onClick={() =>
-                    handleBtn({
-                        fullname,
-                        sdt,
-                        city,
-                        address,
-                    })
-                }
-                className={cx('btn')}
-            >
+            <button onClick={formik.handleSubmit} className={cx('btn')}>
                 Thanh toán
             </button>
         </div>

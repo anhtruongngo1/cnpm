@@ -64,7 +64,7 @@ function ShopPage() {
     return (
         <CartCountContext.Provider value={cartCount}>
             <Defaultlayout cartCount={cartCount}>
-                <div className={cx('wrapper')}>
+                <div className={cx('wrapper')} onClick={()=>{console.log('check scroll' , window.scrollY);}}>
                     <div className={cx('shop-title')}>
                         <div className={cx('shop-title-content')}>
                             <h1 className={cx('content-left')}>SHOP</h1>
@@ -191,6 +191,7 @@ function ShopPage() {
                         </div>
                     </div>
                 </div>
+             
             </Defaultlayout>
         </CartCountContext.Provider>
     );

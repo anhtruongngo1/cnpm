@@ -6,12 +6,18 @@ import '../auth/Login.scss';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import { IconFace, IconGoogle, IconIns } from '../Icons/Icons';
-import {handleLogin} from "~/Services/adminServices"
+import {handleLogin} from "~/Services/adminServices" ;
+import { useDispatch } from 'react-redux';
+import { handleDataUser } from '~/redux/userSlice';
+
+
 
 function Login() {
     const [notify, setnotify] = useState('');
     const [isShowPassword, setisShowPassword] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch()
+
 
     const formik = useFormik({
         initialValues: {
@@ -40,7 +46,9 @@ function Login() {
                 const dataPass = res.find(item =>item.username === values.userName && item.password === values.password )
                 if(dataPass){
                     setnotify('đăng nhập thành công')
+                    dispatch(handleDataUser(dataPass)) 
                     navigate("/shop")
+
                 }else{
                     setnotify("sai mật khẩu")
                 }
