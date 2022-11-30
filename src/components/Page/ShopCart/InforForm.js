@@ -13,6 +13,24 @@ function InforForm({ handleBtn }) {
     const [form, setform] = useState('1');
     const [address, setAddress] = useState('');
     const [city, setCity] = useState('');
+    const [province, setProvince] = useState([]);
+    const [districts, setDistricts] = useState([]);
+
+    useEffect(() => {
+        const getProvince = async () => {
+            const res = await axios.get('https://provinces.open-api.vn/api/?depth=1');
+            setProvince(res.data);
+        };
+        getProvince();
+    }, []);
+
+    const HandleDistricts = (code) => {
+        const getDistrict = async () => {
+            const res = await axios.get(`https://provinces.open-api.vn/api/p/${code}?depth=2`);
+            setDistricts(res.data.districts);
+        };
+        getDistrict();
+    };
 
     const formik = useFormik({
         initialValues: {
@@ -112,10 +130,35 @@ function InforForm({ handleBtn }) {
                 </div>
                 {check === 'HOME' ? (
                     <div className={cx('box-input')}>
-                        <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} />
+                        {/* <input placeholder="Thành phố" value={city} onChange={(e) => setCity(e.target.value)} /> */}
+                        <select
+                            onChange={(e) => {
+                                setCity(e.target.value);
+                                HandleDistricts(e.target.value);
+                            }}
+                        >
+                            <option>--Thành phố--</option>
+                            {province.map((item) => {
+                                return (
+                                    <option key={item.code} value={item.code}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
+                        <select onChange={(e) => setAddress(e.target.value)}>
+                            <option>--Quận huyện--</option>
+                            {districts.map((item) => {
+                                return (
+                                    <option key={item.code} value={item.code}>
+                                        {item.name}
+                                    </option>
+                                );
+                            })}
+                        </select>
                         <input
                             placeholder="địa chỉ cụ thể"
-                            value={address}
+                            // value={address}
                             onChange={(e) => setAddress(e.target.value)}
                         />
                     </div>
