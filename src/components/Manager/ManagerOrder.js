@@ -19,6 +19,8 @@ function ManagerOrder() {
   const [isShowModal, setisShowModal] = useState(false)
   const [isShowModalEdit, setisShowModalEdit] = useState(false)
   const [isDataSend, setDataSend] = useState([])
+  const [city , setCity] = useState('')
+  const [district , setDistricts] = useState('')
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(3);
   useEffect(() => {
@@ -82,6 +84,8 @@ function ManagerOrder() {
   const Paginate = (pageNumber) => {
       setCurrentPage(pageNumber)
   }
+  console.log('check cur' , currentPosts);
+
 
   return (
     <div className="manager-film-body ">
@@ -97,6 +101,8 @@ function ManagerOrder() {
           <tr>
             <th scope="col">ID </th>
             <th scope="col">Tên người đặt</th>
+            <th scope="col">Thành phố</th>
+            <th scope="col">quận / huyện</th>
             <th scope="col">địa chỉ</th>
             <th scope="col">sđt</th>
             <th scope="col">Price</th>
@@ -108,10 +114,16 @@ function ManagerOrder() {
         <tbody>
           {currentPosts && currentPosts.length > 0 &&
             currentPosts.map((item, i) => (
-
               <tr key={i}>
                 <th scope="row"> {item.id}</th>
                 <td>{ item.infor} </td>
+                <td>
+                {item.city}
+
+                </td>
+                <td>
+                {item.distrist}
+                </td>
                 <td>
                 {item.address}
                 </td>

@@ -27,12 +27,13 @@ function LayoutBuy() {
                 (async () => {
                     await axios.post(` http://localhost:3000/order`, {
                         price: total,
-                        address: data.address + data.city,
+                        address: data.address ,
+                        city : data.city ,
+                        distrist : data.districts ,
                         infor: data.fullname,
                         sdt: data.sdt,
                         status: 'đang xác nhận',
                     });
-                    await axios.delete(`http://localhost:3000/cart/${user_id}`);
                 })();
                 swal('Mua thành công', {
                     icon: 'success',
